@@ -26,5 +26,8 @@ The perfect game:
 6. The ending screen allows for options to return to menu, restart game, or change characters if the player would like.
 
 
+https://trello.com/b/9AHPDZUr/wdi-sm-43-project-1
+
+
 
 The order of development of this game is straighforward and in this order: There needs to be a play button, a character, an environment with obstacles, a score tally, and the screen to side-scroll smoothly. All other code that follows will be to improve the quality and user interaction of the game.
