@@ -1,0 +1,14 @@
+* {
+  text-align: center;
+
+}
+body {
+  /*background-image: url("assets/BackgroundSite.jpg");*/
+}
+
+canvas {
+  border: 1px black solid;
+
+  background: transparent;
+
+}
