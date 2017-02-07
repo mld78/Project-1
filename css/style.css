@@ -2,13 +2,46 @@
   text-align: center;
 
 }
-body {
-  /*background-image: url("assets/BackgroundSite.jpg");*/
+#gameArea {
+  position:absolute;
+  left:50px;
+  top:50px;
+  width:640px;
+  height:500px;
+  overflow:hidden;
 }
 
-canvas {
-  border: 1px black solid;
+#spaceShip{
+  z-index:5;
+  max-width: 100px;
+  max-height: 100px;
 
-  background: transparent;
+}
 
+#gameScore {
+  position:absolute;
+  left:400px;
+  top:0px;
+  height:25px;
+  z-index:5;
+  color:purple;
+  font-weight:900
+}
+
+#instructions {
+  left:205px;
+  top:75px;
+  z-index:100;
+}
+#background {
+  top:-20px;
+  height:320px;
+  background-image:'url(BackgroundSite.jpg)';
+}
+
+#foreground {
+  top:235px;
+  height:85px;
+  z-index:4;
+  background-image:'url(grass.jpeg)'
 }
