@@ -35,13 +35,14 @@
 }
 #background {
   top:-20px;
-  height:320px;
-  background-image:'url(BackgroundSite.jpg)';
+  height: 320px;
+  background-image:url('imgs/BackgroundSite.jpg');
+
 }
 
 #foreground {
   top:235px;
   height:85px;
   z-index:4;
-  background-image:'url(grass.jpeg)'
+  background-image:url('imgs/grass.jpeg')
 }
