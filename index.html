@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Flying Rick & Morty</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script
-  src="https://code.jquery.com/jquery-3.1.1.js"
-  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-  crossorigin="anonymous"></script>
 
+    <meta charset="utf-8">
+
+    <title>Flying Rick & Morty</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous">
+    </script>
 
   </head>
+
+
   <body>
 
   <header>
-
     <h1>Flying Rick & Morty</h1>
-    <h3>Instructions: Click the mouse or press the space bar to jump. Or don't. No one will care.</h3>
+    <h3>Instructions: Click the mouse/press the space bar to jump.</h3>
   </header>
 
   <div id='gameArea'>
 
-    <div id='gameScore'></div>
-    <img id='spaceShip' src="assets/Ship.png" />
-    <img id='instructions' src='assets/instructions.png' />
-    <div class="backImage" id='background'></div>
-    <div class="backImage" id='foreground'></div>
+    <div class="backImage" id='background'>
+      <div id='gameScore'>0</div>
+      <div id='spaceShip'></div>
+      <img id='startButton' src='assets/start.gif' />
+    </div>
 
 
   </div>

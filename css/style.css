@@ -1,48 +1,58 @@
 * {
   text-align: center;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  font-weight: 200;
+}
 
+body{
+  background-color: gray;
 }
 #gameArea {
-  position:absolute;
-  left:50px;
-  top:50px;
-  width:640px;
-  height:500px;
-  overflow:hidden;
+  width: 700px;
+  margin: 20px auto;
 }
 
 #spaceShip{
-  z-index:5;
-  max-width: 100px;
-  max-height: 100px;
-
+  height: 28px;
+  width: 40px;
+  position: absolute;
+	bottom: 50%;
+	left: 130px;
+	z-index: 2;
+  background-image: url('imgs/Ship.png');
+  background-size: contain;;
 }
 
 #gameScore {
-  position:absolute;
-  left:400px;
-  top:0px;
-  height:25px;
-  z-index:5;
-  color:purple;
-  font-weight:900
+
+  position: absolute;
+  width: 100%;
+  display: block;
+  text-align: center;
+  z-index: 4;
+  font-size: 250%;
+  padding-top: 20px;
+  font-weight: 700;
+  color: purple;
 }
 
-#instructions {
-  left:205px;
+#startButton {
+  width:150px;
+  position: relative;;
+  height:100px;
+
   top:75px;
   z-index:100;
 }
 #background {
-  top:-20px;
-  height: 320px;
   background-image:url('imgs/BackgroundSite.jpg');
+  position: relative;
+  	overflow: hidden;
+    margin-bottom: 10px;
+    height: 450px;
+    background-size: cover;
 
-}
-
-#foreground {
-  top:235px;
-  height:85px;
-  z-index:4;
-  background-image:url('imgs/grass.jpeg')
 }
