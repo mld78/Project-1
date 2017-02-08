@@ -3,20 +3,19 @@ console.log('Connected to this site')
 
 //Setup for when page loads
 $(document).ready(function() {
-    ship = $('#spaceShip')
-    area = $('#gameArea')
-    button = $('#startButton').on('click', start)
+    $ship = $('#spaceShip')
+    $gameArea = $('#background')
+    $button = $('#startButton').on('click', start)
     fall = 1000
     gameState = 2
-    obstacle = 0
-    obstacleGap = 120
+    score = 0
+    obstacleGap = 150
 
 //initial click function to run
   function start() {
 
-        startShipPosition = { x: 10, y:100, h:40, w:50 }
-        ship.css({left:startShipPosition.x, top:startShipPosition.y, width:startShipPosition.w, height:startShipPosition.h, rotate:0})
-        $('.obstacles').remove()
+        //add a starting sound clip
+        $('#startButton').remove()
 
     }
 
@@ -39,7 +38,7 @@ $(document).ready(function() {
 
 //Click for ship up movement
 
-    $(window).mousedown(function(){
+    $gameArea.mousedown(function(){
       shipUp()
       if(gameState === 2){
         gameState = 1
@@ -49,57 +48,105 @@ $(document).ready(function() {
 
 //spacebar for shup up movement
 
-    $(window).keypress(function(bar){
+    $(window).keyup(function(bar){
       if(bar.keyCode === 32){
-
+        shipUp()
+        bar.preventDefault()
+        if(gameState === 2){
+          gameState = 1
+          removeInterval()
+        }
       }
     })
 
+  //function to make ship move up
 
-    console.log('hello')
+    function shipUp(){
+      if(gameState === 1 || gameState === 2){
+        $ship.css('transform', 'rotate(-20deg)')
+        $ship.stop().animate({
+          bottom: '+=60px'
+        }, 200, function(){
+          currentShipPosition()
+          $ship.css('transform', 'rotate(0deg)')
+          $ship.stop().animate({
+            bottom: '-=60px'
+          }, 300, 'linear', function(){
+            currentShipPosition()
+            naturalFall()
+          })
+        })
+      }
+    }
+
+//create fall for when click or bar is not pressed
+
+  function naturalFall(){
+      gravity = parseInt($ship.css('bottom')) / $gameArea.height()
+
+      fullGravity = fall * gravity
+
+      $ship.stop().animate({
+        bottom: '0'
+      }, fullGravity, 'linear')
+
+      $ship.css('transform', 'rotate(30deg)')
+  }
+
+// ship position function that says if ship is at bottom of screen then end game else run all other functions
+
+  function currentShipPosition() {
+    if (parseInt($ship.css('bottom')) === 0){
+      gameOver()
+    }
+  }
+
+//Setup interval for how obstacles should be removed
+
+    function removeInterval(){
+      setTimeout(function(){
+        var initialSetup = setInterval(function(){
+          if(gameState === 1){
+            removeObstacle()
+          }
+        }, 1300)
+      }, 2000)
+    }
+
+
+//Create both top and bottom obstacle
+
+    function createObstacle(){
+      score++
+
+      obstacleTop = Math.floor(Math.random() * ($gameArea.height() - 250)) + 100
+
+      obstacleBottom = $gameArea.height() - (obstacleTop + obstacleGap)
+
+      obstacle = '<div class="alien" id="' + score + '"><div id="top" style="height: ' + obstacleTop + 'px"></div><div id="bottom" style="height:' + obstacleBottom + 'px" ></div></div>'
+
+      $gameArea.append(obstacle)
+    }
+
+
+// Create a function to move obstacles across screen
+
+  function updateObstacle(){
+    $('.alien').each(function(){
+      $(this).animate({
+        right: '+=300px'
+      }, 1300, 'linear')
+    })
+  }
+
+// function that deletes obstacles that have gone off left of screen
+
+function removeObstacle(){
+  $('.gameArea .alien').first().remove()
+}
 
 
 
-
+console.log('hello')
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-// initialSpeed = 0;
-//
-// function onClick() {
-//     if (gameState > 1)
-//     return
-//     if (gameState === 0) {
-//         gameState = 1
-//         $('#instructions').hide()
-//         spaceshipStep = window.setInterval(shipStep, 30)
-//     }
-//     currentSpeed = initialSpeed
-// }
-//
-//
-// function shipStep() {
-//
-//     gravity = -1;
-//     currentSpeed += gravity
-//     currentShipPosition.y = Math.max(currentShipPosition.y + currentSpeed, 0)
-//     var dodge = area.height()-currentShipPosition.h, margin = -12, low = 0, actPillar = $('.obstacles');
-//     ship.css({top: currentShipPosition.y})
-//
-// }
-// })
