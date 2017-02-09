@@ -65,7 +65,22 @@ h2 {
   padding-top: 20px;
   font-weight: 700;
   color: purple;
+  font-size: 60px
 }
+
+#finalScore {
+  position: absolute;
+  width: 100%;
+  display: block;
+  text-align: center;
+  z-index: 4;
+  font-size: 250%;
+  padding-top: 20px;
+  font-weight: 700;
+  color: purple;
+  font-size: 60px;
+}
+
 
 #startButton {
   width:150px;
@@ -94,15 +109,16 @@ h2 {
 
  .alien #bottom {
   bottom:0;
-  width:100%;
+  width:50px;
   position:absolute;
   background-image: url('imgs/obstacle.png');
   background-size: contain;
+  object-fit: fill;
 }
 
-.alien #top {
+  .alien #top {
   top: 0;
-  width: 100%;
+  width: 50px;
   background-image: url('imgs/obstacle.png');
   position: absolute;
   background-size: contain;
@@ -112,12 +128,11 @@ h2 {
 
 
 
-
 #background {
   background-image:url('imgs/BackgroundSite.jpg');
   position: relative;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   height: 450px;
   background-size: cover;
 

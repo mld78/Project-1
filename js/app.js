@@ -10,12 +10,12 @@ $(document).ready(function() {
     beforeGameStart = 2
     gameRunning = 1
     gameEnd = 0
-    fall = 1000
+
     gameState = beforeGameStart
     score = 0
     $startScore = $('#gameScore')
     $finalScore = $('#finalScore').hide()
-    obstacleGap = 200
+    obstacleGap = 150
     $introAudio = $('#openingLine')[0]
 
 //initial click function to run
@@ -56,7 +56,6 @@ $(document).ready(function() {
       shipUp()
       if(gameState === beforeGameStart){
         gameState = gameRunning
-        removeInterval()
       }
     })
 
@@ -68,23 +67,11 @@ $(document).ready(function() {
         bar.preventDefault()
         if(gameState === beforeGameStart){
           gameState = gameRunning
-          removeInterval()
         }
       }
     })
 
-    //Setup interval for how obstacles should be removed
 
-        function removeInterval(){
-          setTimeout(function(){
-            var initialSetup = setInterval(function(){
-              if(gameState === gameRunning){
-                obstacleFunctions()
-                removeObstacle()
-              }
-            }, 1300)
-          }, 2000)
-        }
   //function to make ship move up
 
     function shipUp(){
@@ -93,12 +80,14 @@ $(document).ready(function() {
         $ship.stop().animate({
           bottom: '+=60px'
         }, 200, function(){
-
+          obstacleFunctions()
+          currentShipPosition()
           $ship.css('transform', 'rotate(0deg)')
           $ship.stop().animate({
             bottom: '-=60px'
           }, 200, 'linear', function(){
-
+            obstacleFunctions()
+            currentShipPosition()
             naturalFall()
           })
         })
@@ -106,6 +95,7 @@ $(document).ready(function() {
     }
 
 //create fall for when click or bar is not pressed
+fall = 1000
 
   function naturalFall(){
       gravity = parseInt($ship.css('bottom')) / $gameArea.height()
@@ -126,12 +116,7 @@ $(document).ready(function() {
 //obstacle functions and collision
 function obstacleFunctions() {
 
-  shipSetup = setInterval(function(){
-    if(gameState === gameRunning){
-      // obstacleFunctions()
-      currentShipPosition()
-    }
-  }, 10)
+
 
   createObstacle = function(){
 
@@ -145,44 +130,50 @@ function obstacleFunctions() {
       $gameArea.append(obstacle)
     }
 
-  // function that deletes obstacles that have gone off left of screen
-      removeObstacle = function(){
-        $('.gameArea .alien').first().remove()
-      }
-
       // Create a function to move obstacles across screen
 
         updateObstacle = function(){
           $('.alien').each(function(){
             $(this).animate({
-              right: '+=300px'
-            }, 2000, 'linear')
+              right: '+=700px'
+            }, 3500, 'linear', function(){
+              $(this).remove()
+            })
           })
       }
 
       // ship position function that says if ship is at bottom of screen then end game else run all other functions
-      // alienFullObstacle = ($('.alien').offset())
-      // console.log(alienFullObstacle)
+      $alienTopObstacle = ($('#top').offset())
+      $alienBottomObstacle = ($('#bottom').offset())
+      // console.log($alienTopObstacle)
+      // console.log(alienBottomObstacle)
 
       currentShipPosition = function() {
         //create offset variables here that represent ship and the top/bottom obstacles and obstacles as a whole
 
-          console.log('works')
+
           if  (parseInt($ship.css('bottom')) === 0) {
             gameOver()
           }
 
-         else if ( (($ship.offset().left + $ship.width()) >= (($('.alien #top').offset().left))) && (($ship.offset().top) <= ($('#top').offset().top))) {
-            gameOver()
-          }
-          else if ( (($ship.offset().left + $ship.width()) >= (($('.alien #bottom').offset().left))) && (($ship.offset().top + $ship.height()) >= ($('#top').offset()).top )){
-              gameOver()
-            }
+          else if ( (($ship.offset().left + $ship.width()) >= (($('#top')))) && (($ship.offset().top) <= ($('#top').offset().top))) {
+             gameOver()
+           }
+           else if ( (($ship.offset().left + $ship.width()) >= (($('#bottom').offset()))) && (($ship.offset().top + $ship.height()) >= ($('#top').offset()).top )){
+               gameOver()
+             }
             else {
-              $('#gameScore').html(score-3)
-            }
+              $('#gameScore').html(score-2) //do not touch this, is timed with updateObstacle
+            } console.log('works')
 
 }
+
+shipSetup = setInterval(function(){
+  if(gameState === gameRunning){
+
+    currentShipPosition()
+  }
+}, 10)
 }
 
 //function to reset game
@@ -194,11 +185,13 @@ function resetGame(){
 // function that tells game what to do if game ends
 
   function gameOver(){
+
+
     $('.alien').stop()
     clearInterval(shipSetup)
     $buttonReset = $('#resetButton').show().on('click', resetGame) //fix reset button
     naturalFall()
-    $finalScore = $('#finalScore').show().html("BRRRRRRRRRP that's pathetic isn't it Morty? " +  score-3)
+    $finalScore = $('#finalScore').show().html(score-2)
     $startScore = $('#gameScore').hide()
     gameState= gameEnd
     console.log('Game Over')
