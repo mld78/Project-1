@@ -5,7 +5,7 @@ console.log('Connected to this site')
 $(document).ready(function() {
     $ship = $('#spaceShip')
     $gameArea = $('#background')
-    $buttonStart = $('#startButton').on('click', begin) //make sure this is correct
+    $buttonStart = $('#startButton') // .on('click', begin) //make sure this is correct
     $buttonReset = $('#resetButton').hide()
     beforeGameStart = 2
     gameRunning = 1
@@ -16,8 +16,11 @@ $(document).ready(function() {
     $startScore = $('#gameScore')
     $finalScore = $('#finalScore').hide()
     obstacleGap = 200
+    $introAudio = $('#openingLine')[0]
 
 //initial click function to run
+  $buttonStart.on('click', begin())
+
    function begin() {
 
       setInterval(function(){
@@ -30,7 +33,11 @@ $(document).ready(function() {
 
 
         //add a starting sound clip
-        $buttonStart.remove()
+
+        $buttonStart.on('click', function(){
+          $introAudio.play()
+          $buttonStart.remove()
+        })
 
     }
 
@@ -165,10 +172,10 @@ function obstacleFunctions() {
             gameOver()
           }
 
-         else if ( (($ship.offset().left + $ship.width()) >= (($('.alien').offset().left))) && (($ship.offset().top) <= ($('#top').offset().top))) {
+         else if ( (($ship.offset().left + $ship.width()) >= (($('.alien #top').offset().left))) && (($ship.offset().top) <= ($('#top').offset().top))) {
             gameOver()
           }
-          else if ( (($ship.offset().left + $ship.width()) >= (($('.alien').offset().left))) && (($ship.offset().top + $ship.height()) >= ($('#top').offset()).top )){
+          else if ( (($ship.offset().left + $ship.width()) >= (($('.alien #bottom').offset().left))) && (($ship.offset().top + $ship.height()) >= ($('#top').offset()).top )){
               gameOver()
             }
             else {
