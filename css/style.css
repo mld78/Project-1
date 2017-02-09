@@ -48,6 +48,15 @@ body{
   z-index:100;
 }
 
+#resetButton {
+  width:150px;
+  position: relative;;
+  height:100px;
+
+  top:75px;
+  z-index:100;
+}
+
 .alien {
   position: absolute;
   right:-50px;
@@ -56,7 +65,7 @@ body{
   z-index: 2;
 }
 
-.alien #bottom {
+ .alien #bottom {
   bottom:0;
   width:100%;
   position:absolute;

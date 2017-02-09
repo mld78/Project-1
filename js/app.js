@@ -5,36 +5,41 @@ console.log('Connected to this site')
 $(document).ready(function() {
     $ship = $('#spaceShip')
     $gameArea = $('#background')
-    $button = $('#startButton').on('click', start)
+    $buttonStart = $('#startButton').on('click', begin) //make sure this is correct
+    $buttonReset = $('#resetButton').hide()
     fall = 1000
     gameState = 2
     score = 0
-    obstacleGap = 150
+    obstacleGap = 200
 
 //initial click function to run
-  function start() {
+   function begin() {
 
         //add a starting sound clip
-        $('#startButton').remove()
+        $buttonStart.remove()
 
     }
 
-// setup to create and update ship position
+
+  // setup to create and update obstacles appearance
+      var initialSetup = setInterval(function(){
+        if (gameState === 1){
+              obstacleFunctions()
+              createObstacle()
+              updateObstacle()
+            }
+          }, 1300)
+//
+//
+//
+// // setup to create and update ship position
     var shipSetup = setInterval(function(){
       if(gameState === 1){
+        obstacleFunctions()
         currentShipPosition()
       }
     }, 10)
 
-
-
-// setup to create and update obstacles appearance
-      var initialSetup = setInterval(function(){
-        if (gameState === 1){
-          createObstacle()
-          updateObstacle()
-        }
-      }, 1000)
 
 //Click for ship up movement
 
@@ -59,6 +64,18 @@ $(document).ready(function() {
       }
     })
 
+    //Setup interval for how obstacles should be removed
+
+        function removeInterval(){
+          setTimeout(function(){
+            var initialSetup = setInterval(function(){
+              if(gameState === 1){
+                obstacleFunctions()
+                removeObstacle()
+              }
+            }, 1300)
+          }, 2000)
+        }
   //function to make ship move up
 
     function shipUp(){
@@ -67,12 +84,12 @@ $(document).ready(function() {
         $ship.stop().animate({
           bottom: '+=60px'
         }, 200, function(){
-          currentShipPosition()
+
           $ship.css('transform', 'rotate(0deg)')
           $ship.stop().animate({
             bottom: '-=60px'
-          }, 300, 'linear', function(){
-            currentShipPosition()
+          }, 200, 'linear', function(){
+
             naturalFall()
           })
         })
@@ -93,60 +110,79 @@ $(document).ready(function() {
       $ship.css('transform', 'rotate(30deg)')
   }
 
-// ship position function that says if ship is at bottom of screen then end game else run all other functions
-
-  function currentShipPosition() {
-    if (parseInt($ship.css('bottom')) === 0){
-      gameOver()
-    }
-  }
-
-//Setup interval for how obstacles should be removed
-
-    function removeInterval(){
-      setTimeout(function(){
-        var initialSetup = setInterval(function(){
-          if(gameState === 1){
-            removeObstacle()
-          }
-        }, 1300)
-      }, 2000)
-    }
 
 
-//Create both top and bottom obstacle
 
-    function createObstacle(){
+
+//obstacle functions and collision
+function obstacleFunctions() {
+
+  createObstacle = function(){
       score++
+      var obstacleTopVisual = Math.floor(Math.random() * ($gameArea.height() - 250)) + 50
 
-      obstacleTop = Math.floor(Math.random() * ($gameArea.height() - 250)) + 100
+      var obstacleBottomVisual = $gameArea.height() - (obstacleTopVisual + obstacleGap)
 
-      obstacleBottom = $gameArea.height() - (obstacleTop + obstacleGap)
 
-      obstacle = '<div class="alien" id="' + score + '"><div id="top" style="height: ' + obstacleTop + 'px"></div><div id="bottom" style="height:' + obstacleBottom + 'px" ></div></div>'
+      var obstacle = '<div class="alien" block-id="' + score + '"><div id="top" style="height: ' + obstacleTopVisual + 'px" ></div><div id="bottom" style="height:' + obstacleBottomVisual + 'px" ></div></div>'
 
       $gameArea.append(obstacle)
     }
 
+  // function that deletes obstacles that have gone off left of screen
+      removeObstacle = function(){
+        $('.gameArea .alien').first().remove()
+      }
 
-// Create a function to move obstacles across screen
+      // Create a function to move obstacles across screen
 
-  function updateObstacle(){
-    $('.alien').each(function(){
-      $(this).animate({
-        right: '+=300px'
-      }, 1300, 'linear')
-    })
-  }
+        updateObstacle = function(){
+          $('.alien').each(function(){
+            $(this).animate({
+              right: '+=300px'
+            }, 2000, 'linear')
+          })
+      }
 
-// function that deletes obstacles that have gone off left of screen
+      // ship position function that says if ship is at bottom of screen then end game else run all other functions
 
-function removeObstacle(){
-  $('.gameArea .alien').first().remove()
+      currentShipPosition = function() {
+        //create offset variables here that represent ship and the top/bottom obstacles and obstacles as a whole
+
+          console.log('works')
+          if  (parseInt($ship.css('bottom')) === 0) {
+            gameOver()
+          }
+
+         else if ( (($ship.offset().left + $ship.width()) >= (($('.alien').offset().left))) && (($ship.offset().top) <= ($('#top').offset().top))) {
+            gameOver()
+          }
+          else if ( (($ship.offset().left + $ship.width()) >= (($('.alien').offset().left))) && (($ship.offset().top + $ship.height()) >= ($('#top').offset()).top )){
+              gameOver()
+            }
+            else {
+
+            }
+
+}
 }
 
+//function to reset game
 
+// function resetGame(){
+//
+// }
 
-console.log('hello')
+// function that tells game what to do if game ends
+
+  function gameOver(){
+    $('.alien').stop()
+    clearInterval(shipSetup)
+    $buttonReset = $('#resetButton').show() //fix reset button
+    naturalFall()
+
+    gameState=0
+    console.log('Game Over')
+  }
 
 })
