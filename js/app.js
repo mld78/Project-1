@@ -107,7 +107,7 @@ $(document).ready(function() {
         bottom: '0'
       }, fullGravity, 'linear')
 
-      $ship.css('transform', 'rotate(30deg)')
+      $ship.css('transform', 'rotate(10deg)')
   }
 
 
@@ -118,12 +118,12 @@ $(document).ready(function() {
 function obstacleFunctions() {
 
   createObstacle = function(){
-      score++
+
       var obstacleTopVisual = Math.floor(Math.random() * ($gameArea.height() - 250)) + 50
 
       var obstacleBottomVisual = $gameArea.height() - (obstacleTopVisual + obstacleGap)
 
-
+      score++
       var obstacle = '<div class="alien" block-id="' + score + '"><div id="top" style="height: ' + obstacleTopVisual + 'px" ></div><div id="bottom" style="height:' + obstacleBottomVisual + 'px" ></div></div>'
 
       $gameArea.append(obstacle)
@@ -160,9 +160,9 @@ function obstacleFunctions() {
           else if ( (($ship.offset().left + $ship.width()) >= (($('.alien').offset().left))) && (($ship.offset().top + $ship.height()) >= ($('#top').offset()).top )){
               gameOver()
             }
-            else {
-
-            }
+            // else {
+            //
+            // }
 
 }
 }

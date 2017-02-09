@@ -41,7 +41,7 @@ body{
 
 #startButton {
   width:150px;
-  position: relative;;
+  position: relative;
   height:100px;
 
   top:75px;
@@ -50,7 +50,7 @@ body{
 
 #resetButton {
   width:150px;
-  position: relative;;
+  position: absolute;
   height:100px;
 
   top:75px;
