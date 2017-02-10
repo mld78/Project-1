@@ -15,7 +15,7 @@ $(document).ready(function() {
   score = 0
   $startScore = $('#gameScore')
   $finalScore = $('#finalScore').hide()
-  obstacleGap = 175
+  obstacleGap = 200
   $introAudio = $('#openingLine')[0]
 
   //initial click function to run
@@ -107,7 +107,7 @@ $(document).ready(function() {
     gravity = parseInt($ship.css('bottom')) / $gameArea.height()
 
     fullGravity = fall * gravity
-
+    $ship.css('transform', 'rotate(20deg)')
     $ship.stop().animate({
       bottom: '0'
     }, fullGravity, 'linear')
@@ -165,11 +165,11 @@ $(document).ready(function() {
       if(parseInt($ship.css('bottom')) === 0){
         console.log('you hit the floor and died')
         gameOver()
-      } else if (($ship.offset().left + $ship.width()) >= (($alienTopObstacle.left)) && ($ship.offset().top + 10) < $alienTopObstacle.top + obstacleGap) {
+      } else if (($ship.offset().left + $ship.width()) >= (($alienTopObstacle.left)) && ($ship.offset().top + 50) < $alienTopObstacle.top + obstacleGap) {
          console.log('This collided with the top obstacle')
         gameOver()
 
-      } else if (($ship.offset().left + $ship.width()) >= (($alienBottomObstacle.left)) && (($ship.offset().top + $ship.height()) >= ($alienBottomObstacle.top))) {
+      } else if (($ship.offset().left + $ship.width()) >= (($alienBottomObstacle.left)) && (($ship.offset().top + $ship.height() - 10) >= ($alienBottomObstacle.top))) {
         console.log('This collided with the bottom obstacle')
         gameOver()
 
@@ -190,7 +190,7 @@ $(document).ready(function() {
           $ship.css('transform', 'rotate(0deg)')
           $ship.stop().animate({
             bottom: '-=60px'
-          }, 200, 'linear', function() {
+          }, 300, 'linear', function() {
 
             naturalFall()
           })
