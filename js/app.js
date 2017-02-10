@@ -134,7 +134,7 @@ $(document).ready(function() {
       if(parseInt($ship.css('bottom')) === 0){
         console.log('you hit the floor and died')
         gameOver()
-      } else if (($ship.offset().left + $ship.width()) >= (($alienTopObstacle.left)) && ($ship.offset().top + 40) < $alienTopObstacle.top + 170) {
+      } else if (($ship.offset().left + $ship.width()) >= (($alienTopObstacle.left)) && ($ship.offset().top + 40) < $alienTopObstacle.top + 180) {
          console.log('This collided with the top obstacle')
         gameOver()
 
