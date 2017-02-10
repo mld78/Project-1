@@ -29,7 +29,7 @@ color:white;
 }
 
 h2 {
-  color:green;
+  color:blue;
 
 }
 
@@ -37,14 +37,14 @@ h2 {
 #screen {
   width: 700px;
   margin: 20px auto;
-  position:relative;
+  position: relative;
   top:125px;
-
+  margin-bottom: 10px;
 }
 
 #spaceShip{
-  height: 45px;
-  width: 70px;
+  height: 40px;
+  width: 60px;
   position: absolute;
 	bottom: 50%;
 	left: 130px;
@@ -64,8 +64,9 @@ h2 {
   font-size: 250%;
   padding-top: 20px;
   font-weight: 700;
-  color: purple;
+  color: aqua;
   font-size: 60px
+
 }
 
 #finalScore {
@@ -112,7 +113,7 @@ h2 {
   width:50px;
   position:absolute;
   background-image: url('imgs/obstacle.png');
-  background-size: contain;
+  background-size: cover;
   object-fit: fill;
 }
 
@@ -121,7 +122,8 @@ h2 {
   width: 50px;
   background-image: url('imgs/obstacle.png');
   position: absolute;
-  background-size: contain;
+  background-size: cover;
+  object-fit: fill;
 }
 
 
