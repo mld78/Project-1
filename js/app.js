@@ -165,11 +165,11 @@ $(document).ready(function() {
       if(parseInt($ship.css('bottom')) === 0){
         console.log('you hit the floor and died')
         gameOver()
-      } else if (($ship.offset().left + $ship.width()) >= (($alienTopObstacle.left)) && ($ship.offset().top + 50) < $alienTopObstacle.top + obstacleGap) {
+      } else if (($ship.offset().left + $ship.width()) >= (($alienTopObstacle.left)) && ($ship.offset().top + 45) < $alienTopObstacle.top + 170) {
          console.log('This collided with the top obstacle')
         gameOver()
 
-      } else if (($ship.offset().left + $ship.width()) >= (($alienBottomObstacle.left)) && (($ship.offset().top + $ship.height() - 10) >= ($alienBottomObstacle.top))) {
+      } else if (($ship.offset().left + $ship.width()) > (($alienBottomObstacle.left)) && (($ship.offset().top + $ship.height() - 10) >= ($alienBottomObstacle.top))) {
         console.log('This collided with the bottom obstacle')
         gameOver()
 
