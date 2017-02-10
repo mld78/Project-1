@@ -34,6 +34,17 @@ Technologies:
 The order of development of this game is straighforward and in this order: There needs to be a play button, a character, an environment with obstacles, a score tally, and the screen to side-scroll smoothly. All other code that follows will be to improve the quality and user interaction of the game.
 
 
+Unsolved Problems:  
+  
+  1. The collision is still very hit or miss. It needs more fine tuning to be more accurate.
+  2. Adjusting the spaceship to not be a block to help with collision.
+  3. The obstacles get pushed down when a gameover happens due to the Reset Button appearing so adjusting the css so that does not happen.
+  4. Would like for it to change background as the score gets higher.
+  
+
+
+
+
 Wireframes:
 
 MVP wireframe:
@@ -48,3 +59,4 @@ Stretch wireframes:
 
 Installation:  
 Clone this github page and open index.html  [github](https://github.com/mld78/Project-1)
+

@@ -4,7 +4,7 @@
   padding: 0;
   outline: none;
   border: 0;
-  font-weight: 200;
+  font-weight: 150;
 }
 
 body{
@@ -51,19 +51,18 @@ h2 {
 	z-index: 2;
   background-image: url('imgs/Ship.png');
   background-size: cover;
-  background-clip: border-box;
+
 }
 
 #gameScore {
-
+  font-size: 250%;
+  padding-top: 20px;
   position: absolute;
   width: 100%;
   display: block;
   text-align: center;
   z-index: 4;
-  font-size: 250%;
-  padding-top: 20px;
-  font-weight: 700;
+  font-weight: 500;
   color: aqua;
   font-size: 60px
 
@@ -72,14 +71,15 @@ h2 {
 #finalScore {
   position: absolute;
   width: 100%;
-  display: block;
-  text-align: center;
-  z-index: 4;
-  font-size: 250%;
   padding-top: 20px;
   font-weight: 700;
   color: purple;
   font-size: 40px;
+  display: block;
+  text-align: center;
+  z-index: 4;
+  font-size: 250%;
+
 }
 
 
@@ -102,10 +102,10 @@ h2 {
 
 .alien {
   position: absolute;
-  right:-50px;
-  width:50px;
   height:100%;
   z-index: 2;
+  right:-60px;
+  width:60px;
 }
 
  .alien #bottom {

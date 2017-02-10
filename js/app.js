@@ -5,7 +5,7 @@ console.log('Connected to this site')
 $(document).ready(function() {
   $ship = $('#spaceShip')
   $gameArea = $('#background')
-  $buttonStart = $('#startButton') // .on('click', begin) //make sure this is correct
+
   $buttonReset = $('#resetButton').hide()
   beforeGameStart = 2
   gameRunning = 1
@@ -16,9 +16,11 @@ $(document).ready(function() {
   $startScore = $('#gameScore')
   $finalScore = $('#finalScore').hide()
   obstacleGap = 200
-  $introAudio = $('#openingLine')[0]
+
 
   //initial click function to run
+  $buttonStart = $('#startButton')
+    $introAudio = $('#openingLine')[0]
   $buttonStart.on('click', begin())
 
   function begin() {
@@ -41,13 +43,7 @@ $(document).ready(function() {
 
   }
 
-  // // setup to create and update ship position
-  // var shipSetup = setInterval(function(){
-  //   if(gameState === gameRunning){
-  //     obstacleFunctions()
-  //     currentShipPosition()
-  //   }
-  // }, 10)
+
 
 
   //Click for ship up movement
@@ -80,25 +76,6 @@ $(document).ready(function() {
     }
   })
 
-  //function to make ship move up
-
-  // function shipUp() {
-  //   if (gameState === gameRunning) {
-  //     $ship.css('transform', 'rotate(-20deg)')
-  //     $ship.stop().animate({
-  //       bottom: '+=60px'
-  //     }, 200, function() {
-  //       $ship.css('transform', 'rotate(0deg)')
-  //       $ship.stop().animate({
-  //         bottom: '-=60px'
-  //       }, 200, 'linear', function() {
-  //         obstacleFunctions()
-  //         // currentShipPosition()
-  //         naturalFall()
-  //       })
-  //     })
-  //   }
-  // }
 
   //create fall for when click or bar is not pressed
   fall = 750
@@ -112,7 +89,7 @@ $(document).ready(function() {
       bottom: '0'
     }, fullGravity, 'linear')
 
-    //$ship.css('transform', 'rotate(10deg)')
+    $ship.css('transform', 'rotate(10deg)')
   }
 
 
@@ -146,15 +123,7 @@ $(document).ready(function() {
       })
     }
 
-    // ship position function that says if ship is at bottom of screen then end game else run all other functions
 
-    // setTimeout(function(){
-    //   console.log($alienTopObstacle.left)
-    // }, 1500)
-    // //setTimeout(function(){console.log($alienBottomObstacle.top)}, 1500)
-    //
-    // $testship = ($ship.offset().left + $ship.width())
-    // console.log($testship)
 
 
     $alienTopObstacle = $('#top').offset()
@@ -165,7 +134,7 @@ $(document).ready(function() {
       if(parseInt($ship.css('bottom')) === 0){
         console.log('you hit the floor and died')
         gameOver()
-      } else if (($ship.offset().left + $ship.width()) >= (($alienTopObstacle.left)) && ($ship.offset().top + 45) < $alienTopObstacle.top + 170) {
+      } else if (($ship.offset().left + $ship.width()) >= (($alienTopObstacle.left)) && ($ship.offset().top + 40) < $alienTopObstacle.top + 170) {
          console.log('This collided with the top obstacle')
         gameOver()
 
